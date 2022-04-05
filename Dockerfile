@@ -4,9 +4,9 @@ COPY gradle gradle
 COPY build.gradle settings.gradle ./
 COPY src src
 
-RUN gradle build -x test
+RUN gradle build -x test -DspringAot=false
 WORKDIR /extracted
-RUN VERSION=`properties --no-daemon --console=plain -q | grep "^version:" | awk '{printf $2}'`
+RUN VERSION=`gradle properties --no-daemon --console=plain -q | grep "^version:" | awk '{printf $2}'`
 RUN jar -xf /workspace/app/build/libs/awair-bridge-$VERSION.jar
 
 FROM eclipse-temurin:17-jre-focal
