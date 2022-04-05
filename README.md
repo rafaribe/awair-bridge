@@ -1,10 +1,10 @@
-Awair <--> PW bridge
+# Awair <--> PW bridge
 
 
-This app will read from Awair API and feed data onto Planetwatch (PW). It is designed to run 
-headless. 
+This app will read from Awair API and feed data onto Planetwatch (PW). It is designed to run
+headless.
 
-# Running the app
+## Running the app
 
 !!!
 Before you run the app, make sure you read the configuration section
@@ -31,14 +31,14 @@ So later you can run:
 
 Build the code and run it right away:
 
-`./gradlew bootRun` 
+`./gradlew bootRun`
 
 (or ./gradlew build then run )
 
 There is no need to install gradle or java, it is self-hosting.
 
 
-# Configure the app
+## Configure the app
 
 If you just blindly run the app right away, you're probably going to see it fail.
 
@@ -47,7 +47,7 @@ src/main/resources/application.yml or overriding them via env variables (see abo
 
 
 The key things to configure:
-1) awair.token 
+1) awair.token
 
 This is the key that lets us talk to awair. Open your Awair Home Application, click one of your sensors and press Awair+, Awair APIs Beta, Cloud API, Get API Token. Copy that key that looks like "ey...."
 
@@ -59,18 +59,18 @@ This is your PW username eg foo@gmail.com
 
 This is your PW password eg abcdef
 
-# Running on raspberry pi/docker
+## Running on raspberry pi/docker
 
 It's java so it should run anywhere, but simplest is to use docker:
 
-``
+```sh
  docker run -d --restart=always -e awair_token=YOUR-AWAIR-TOKEN -e pw_username=foo@gmail.com -e pw_password=bar wwadge/awair-bridge
-``
+```
 
 For raspberry pi v3 please try:  wwadge/awair-bridge:armv7
 
 
-# Troubleshooting
+## Troubleshooting
 
 !!
 Cloudflare might block request for you forcing you to use a VPN. PW configured
