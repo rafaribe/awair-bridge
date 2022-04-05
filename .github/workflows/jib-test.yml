@@ -1,0 +1,23 @@
+---
+name: JIB container publish
+on:
+    push:
+        branches: [main]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: JIB container build and publish
+        uses: MathieuSoysal/jib-container-publish.yml@v2.0.7
+        with:
+          # Use docker.io for Docker Hub if empty
+          REGISTRY: ghcr.io
+          # github.repository as <your-account>/<your-repo>
+          IMAGE_NAME: ${{ github.repository }}
+          # Tag name of the image to publish
+          tag-name: ${{ github.event.release.tag_name }}
+          # Username to login to registry
+          USERNAME: ${{ github.actor }}
+          # Password to login to registry
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          java-version: 17

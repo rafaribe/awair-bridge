@@ -6,8 +6,7 @@ COPY src src
 
 RUN gradle build -x test -DspringAot=false
 WORKDIR /extracted
-RUN VERSION=`gradle properties --no-daemon --console=plain -q | grep "^version:" | awk '{printf $2}'`
-RUN jar -xf /workspace/app/build/libs/awair-bridge-$VERSION.jar
+RUN JAR_VER=${gradle properties -q | grep "version:" | awk '{print $2}'} && jar -xf /workspace/app/build/libs/awair-bridge-$JAR_VER.jar
 
 FROM eclipse-temurin:17-jre-focal
 RUN mkdir /app
